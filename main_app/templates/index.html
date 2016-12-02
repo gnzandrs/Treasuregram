@@ -1,17 +1,78 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
-<html>
+<html lang='en'>
   <head>
+    <link href='{% static 'bootstrap.min.css' %}'
+          rel='stylesheet'  />
+    <link href='{% static 'style.css' %}'
+          rel='stylesheet'  />
     <title>TreasureGram</title>
   </head>
   <body>
-    <h1>TreasureGram</h1>
+
+    <nav class='navbar navbar-default navbar-static-top text-center'>
+      <a href='/'>
+        <img src='{% static 'images/logo.png' %}' height='90' alt='TreasureGram'/>
+      </a>
+    </nav>
+
+    <main class='container' role='main'>
     {% for treasure in treasures %}
-      <p>{{ treasure.name }}</p>
-      {% if treasure.value > 0 %}
-        <p>{{ treasure.value }}</p>
-      {% else %}
-        <p>Unknown</p>
-      {% endif %}
+      <div class='treasure panel panel-default'>
+
+        <div class='panel-heading'>
+          <h3 class='panel-title'>{{ treasure.name }}</h3>
+        </div>
+
+        <div class='panel-body'>
+          <div class='treasure-photo'>
+            <img src='{{ treasure.img_url }}' height='200'>
+          </div>
+          <table class='treasure-table'>
+            <tr>
+              <th>
+                <img src="{% static 'images/material-icon.png' %}">
+                Material:
+              </th>
+              <td>
+                {{ treasure.material }}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <img src="{% static 'images/value-icon.png' %}">
+                Value:
+              </th>
+              <td>
+                {% if treasure.value > 0 %}
+                  {{ treasure.value }}
+                {% else %}
+                  <p>Unknown</p>
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <img src="{% static 'images/location-icon.png' %}">
+                Location:
+              </th>
+              <td>
+                {{ treasure.location }}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
     {% endfor %}
+    </main>
+
+    <footer class="footer container text-center" role="contentinfo">
+      <img src="{% static 'images/brand-icon.png' %}" height="50" alt="">
+      © TreasureGram 2016
+      <img src="{% static 'images/brand-icon.png' %}" height="50" alt="">
+    </footer>
+
   </body>
 </html>
