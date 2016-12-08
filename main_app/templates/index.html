@@ -17,55 +17,27 @@
       </a>
     </nav>
 
-    <main class='container' role='main'>
-    {% for treasure in treasures %}
-      <div class='treasure panel panel-default'>
+    <main class="container container--mw700" role='main'>
+      <div class="row">
+        {% for treasure in treasures %}
+        <div class="col-md-4">
 
-        <div class='panel-heading'>
-          <h3 class='panel-title'>{{ treasure.name }}</h3>
-        </div>
+          <div class="treasure panel panel-default">
+            <div class='panel-heading'>
+              <h3 class='panel-title'>{{ treasure.name }}</h3>
+            </div>
 
-        <div class='panel-body'>
-          <div class='treasure-photo'>
-            <img src='{{ treasure.img_url }}' height='200'>
+            <div class="treasure-photo">
+              <img src="{{ treasure.img_url }}">
+            </div>
           </div>
-          <table class='treasure-table'>
-            <tr>
-              <th>
-                <img src="{% static 'images/material-icon.png' %}">
-                Material:
-              </th>
-              <td>
-                {{ treasure.material }}
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <img src="{% static 'images/value-icon.png' %}">
-                Value:
-              </th>
-              <td>
-                {% if treasure.value > 0 %}
-                  {{ treasure.value }}
-                {% else %}
-                  <p>Unknown</p>
-                {% endif %}
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <img src="{% static 'images/location-icon.png' %}">
-                Location:
-              </th>
-              <td>
-                {{ treasure.location }}
-              </td>
-            </tr>
-          </table>
-        </div>
 
+        </div>
+        {% if forloop.counter|divisibleby:3 %}
+          </div><div class="row">
+        {% endif %}
+        {% endfor %}
       </div>
-    {% endfor %}
     </main>
 
     <footer class="footer container text-center" role="contentinfo">
